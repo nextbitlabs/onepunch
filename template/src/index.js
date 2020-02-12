@@ -1,7 +1,9 @@
 /*
 	Change slide with arrow keys
 */
-document.onkeydown = function checkKeycode(event) {
+window.addEventListener('keydown', handleOnkeydown);
+
+function handleOnkeydown(event) {
 	const {keyCode} = event;
 	const LEFT = 37;
 	const UP = 38;
@@ -16,5 +18,6 @@ document.onkeydown = function checkKeycode(event) {
 		case LEFT:
 			window.scrollBy(0, -window.innerHeight);
 			break;
+		// No default
 	}
 }

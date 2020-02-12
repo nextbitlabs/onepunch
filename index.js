@@ -20,28 +20,28 @@ const cli = meow({
 		init: {
 			type: 'boolean',
 			default: false,
-			alias: 'i'
+			alias: 'i',
 		},
 		print: {
 			type: 'boolean',
 			default: false,
-			alias: 'p'
+			alias: 'p',
 		},
 		start: {
 			type: 'boolean',
-			default: false
+			default: false,
 		},
 		width: {
 			type: 'number',
 			default: 960,
-			alias: 'w'
+			alias: 'w',
 		},
 		height: {
 			type: 'number',
 			default: 600,
-			alias: 'h'
-		}
-	}
+			alias: 'h',
+		},
+	},
 });
 
 if (cli.flags.init && !cli.flags.print && !cli.flags.start) {
@@ -51,10 +51,10 @@ if (cli.flags.init && !cli.flags.print && !cli.flags.start) {
 } else if (cli.flags.start && !cli.flags.print && !cli.flags.init) {
 	start();
 } else {
-	abort(`Too many flags used, please double check the command.`);
+	abort('Too many flags used, please double check the command.');
 }
 
-function start () {
+function start() {
 	liveServer.start({
 		port: 8180,
 		root: process.cwd(),
@@ -63,7 +63,7 @@ function start () {
 	});
 }
 
-function init (input) {
+function init(input) {
 	const presentationPath = path.resolve(input);
 	const presentationName = path.basename(presentationPath);
 
@@ -75,7 +75,7 @@ function init (input) {
 	fs.copySync(path.resolve(__dirname, 'template'), presentationPath);
 }
 
-function print () {
+function print() {
 	liveServer.start({
 		port: 8181,
 		root: process.cwd(),
@@ -93,15 +93,15 @@ function print () {
 			path: 'index.pdf',
 			width,
 			height,
-			printBackground: true
+			printBackground: true,
 		});
 		await browser.close();
 		liveServer.shutdown();
 	})();
 }
 
-function abort(message, errno = 1) {
-	console.error(message)
-	console.error(`Aborting.`)
-	process.exit(1)
+function abort(message) {
+	console.error(message);
+	console.error('Aborting.');
+	process.exit(1);
 }

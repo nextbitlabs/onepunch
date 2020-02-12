@@ -1,10 +1,10 @@
 {
-  "name": "onepunch",
+  "name": "@nextbitlabs/onepunch",
   "version": "1.0.0",
   "description": "Command-line interface to create PDF presentations using web technology.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "xo index.js template/src/index.js",
     "release": "np"
   },
   "bin": {
@@ -38,9 +38,21 @@
     "puppeteer": "^2.1.1"
   },
   "devDependencies": {
-    "np": "^6.0.0"
+    "np": "^6.0.0",
+    "xo": "^0.25.3"
   },
   "publishConfig": {
     "access": "public"
+  },
+  "xo": {
+    "envs": [
+      "browser"
+    ],
+    "rules": {
+      "comma-dangle": [
+        "error",
+        "always-multiline"
+      ]
+    }
   }
 }

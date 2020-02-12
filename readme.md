@@ -11,7 +11,7 @@ To use **onepunch**, you should have installed **node** and **npm** in your syst
 Install **onepunch** globally with the following command:
 
 ```
-$ npm install -g onepunch
+$ npm install -g @nextbitlabs/onepunch
 ```
 
 Please note that onepunch makes use of [puppeteer](https://github.com/puppeteer/puppeteer/), which will download chromium. This is necessary to print the PDF file.
