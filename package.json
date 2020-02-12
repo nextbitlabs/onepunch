@@ -1,0 +1,39 @@
+{
+  "name": "onepunch",
+  "version": "1.0.0",
+  "description": "Command-line interface to create PDF presentations using web technology.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "onepunch": "./index.js"
+  },
+  "keywords": [
+    "html",
+    "css",
+    "pdf",
+    "web",
+    "presentations",
+    "slides"
+  ],
+  "files": [
+    "index.js",
+    "template",
+    "LICENSE"
+  ],
+  "repository": "nextbitlabs/onepunch",
+  "bugs": "https://github.com/nextbitlabs/onepunch/issues",
+  "homepage": "https://github.com/nextbitlabs/onepunch",
+  "author": {
+    "name": "Riccardo Scalco",
+    "url": "https://riccardoscalco.github.io/"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "fs-extra": "^8.1.0",
+    "live-server": "^1.2.1",
+    "meow": "^6.0.0",
+    "puppeteer": "^2.1.1"
+  }
+}
