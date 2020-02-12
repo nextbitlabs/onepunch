@@ -4,7 +4,8 @@
   "description": "Command-line interface to create PDF presentations using web technology.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "release": "np"
   },
   "bin": {
     "onepunch": "./index.js"
@@ -35,5 +36,11 @@
     "live-server": "^1.2.1",
     "meow": "^6.0.0",
     "puppeteer": "^2.1.1"
+  },
+  "devDependencies": {
+    "np": "^6.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
