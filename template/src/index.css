@@ -10,6 +10,8 @@ main > article {
 	padding: 10px;
 	width: 100vw;
 	height: 100vh;
+	border-color: #eee;
+	border-style: solid;
 	position: relative;
 	box-sizing: border-box;
 }

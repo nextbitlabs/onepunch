@@ -31,16 +31,6 @@ const cli = meow({
 			type: 'boolean',
 			default: false,
 		},
-		width: {
-			type: 'number',
-			default: 960,
-			alias: 'w',
-		},
-		height: {
-			type: 'number',
-			default: 600,
-			alias: 'h',
-		},
 	},
 });
 
@@ -83,7 +73,9 @@ function print() {
 		logLevel: 0,
 	});
 
-	const {width, height} = cli.flags;
+	const config = JSON.parse(fs.readFileSync('onepunch.json'));
+	const width = config.width || 960;
+	const height = config.height || 600;
 
 	(async () => {
 		const browser = await puppeteer.launch();

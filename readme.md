@@ -1,6 +1,6 @@
 **onepunch** is a command-line interface to create PDF presentations using web technology.
 
-**onepunch** is designed for designers, it does not provide any default style. Designers can write their CSS files and link them in the `index.html`.
+**onepunch** is designed for designers, it does not provide any default style. Designers can write CSS files and link them in the `index.html`.
 
 ### Prerequisites
 
@@ -22,7 +22,7 @@ Please note that onepunch makes use of [puppeteer](https://github.com/puppeteer/
 $ onepunch --init my-presentation
 ```
 
-The command above creates the directory `my-presentation` with all the files needed to bootstrap the presentation.
+The command above creates the directory `my-presentation` with all the files needed to bootstrap the presentation. The configuration file `onepunch.json` contains configuration parameters, for the moment only the presentation *width* and *height* (in pixels) are available.
 
 ### View the presentation
 
@@ -32,24 +32,15 @@ Inside the project directory, run:
 $ onepunch --start
 ```
 
-The command above starts a local server and opens the browser.
-
-Please use the **responsive design mode** provided by your browser to select the presentation width and height. You can do that with the following steps:
-
-1. Open the responsive design mode. For example, both Chrome and Firefox use the keyboard shortcut `Ctrl + Shift + M`.
-2. Select the width and height of your presentation. You are free in this choice. If in doubt, we suggest 960 pixels for the width and 600 pixels for the height.
-
-Use the arrow keys to see the next and previous slides.
+The command above starts a local server and opens the browser, use the arrow keys to see the next and previous slides.
 
 ### Print the PDF
 
 Inside the project directory, run:
 
 ```
-$ onepunch --print -w 960 -h 600
+$ onepunch --print
 ```
-
-Flags `-w` and `-h` set the width and the height of the presentation and they should be the same values chosen in the browser responsive design mode. If omitted, width and height default to 960 and 600 pixels.
 
 ### Create custom styles
 
