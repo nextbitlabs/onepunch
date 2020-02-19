@@ -6,10 +6,8 @@ Start a local server with:
 $ onepunch --serve
 ```
 
-Print the PDF file with:
+Print the presentation in a PDF file with:
 
 ```
-$ onepunch --print --w 960 -h 600
+$ onepunch --print
 ```
-
-If omitted, `width` and `height` default to 960 and 600.
