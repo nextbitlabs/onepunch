@@ -27,24 +27,24 @@ const cli = meow({
 			default: false,
 			alias: 'p',
 		},
-		start: {
+		serve: {
 			type: 'boolean',
 			default: false,
 		},
 	},
 });
 
-if (cli.flags.init && !cli.flags.print && !cli.flags.start) {
+if (cli.flags.init && !cli.flags.print && !cli.flags.serve) {
 	init(cli.input[0]);
-} else if (cli.flags.print && !cli.flags.init && !cli.flags.start) {
+} else if (cli.flags.print && !cli.flags.init && !cli.flags.serve) {
 	print();
-} else if (cli.flags.start && !cli.flags.print && !cli.flags.init) {
-	start();
+} else if (cli.flags.serve && !cli.flags.print && !cli.flags.init) {
+	serve();
 } else {
 	abort('Too many flags used, please double check the command.');
 }
 
-function start() {
+function serve() {
 	liveServer.start({
 		port: 8180,
 		root: process.cwd(),

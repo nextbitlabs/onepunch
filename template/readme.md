@@ -3,7 +3,7 @@ Please edit file `index.html` to create your presentation.
 Start a local server with:
 
 ```
-$ onepunch --start
+$ onepunch --serve
 ```
 
 Print the PDF file with:

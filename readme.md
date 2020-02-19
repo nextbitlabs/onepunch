@@ -29,7 +29,7 @@ The command above creates the directory `my-presentation` with all the files nee
 Inside the project directory, run:
 
 ```
-$ onepunch --start
+$ onepunch --serve
 ```
 
 The command above starts a local server and opens the browser, use the arrow keys to see the next and previous slides.
