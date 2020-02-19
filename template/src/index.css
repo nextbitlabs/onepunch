@@ -12,6 +12,7 @@ main > article {
 	height: 100vh;
 	border-color: #eee;
 	border-style: solid;
+	border-width: 0;
 	position: relative;
 	box-sizing: border-box;
 }
