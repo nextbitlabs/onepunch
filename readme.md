@@ -19,17 +19,17 @@ Please note that onepunch makes use of [puppeteer](https://github.com/puppeteer/
 ### Create a project
 
 ```
-$ onepunch --init my-presentation
+$ onepunch init [-n directory-name]
 ```
 
-The command above creates the directory `my-presentation` with all the files needed to bootstrap the presentation. The configuration file `onepunch.json` contains configuration parameters, for the moment only the presentation *width* and *height* (in pixels) are available.
+The command above creates the directory `directory-name` with all the files needed to bootstrap the presentation. The configuration file `onepunch.json` contains configuration parameters, for the moment only the presentation *width* and *height* (in pixels) are available.
 
 ### View the presentation
 
 Inside the project directory, run:
 
 ```
-$ onepunch --serve
+$ onepunch serve
 ```
 
 The command above starts a local server and opens the browser, use the arrow keys to see the next and previous slides.
@@ -39,7 +39,7 @@ The command above starts a local server and opens the browser, use the arrow key
 Inside the project directory, run:
 
 ```
-$ onepunch --print
+$ onepunch print
 ```
 
 ### Create custom styles

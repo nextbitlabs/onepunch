@@ -9,39 +9,51 @@ const liveServer = require('live-server');
 const cli = meow({
 	description: false,
 	help: `
-		Usage
-			$ one-punch
+		NAME
+			onepunch -- create presentation with web technology
 
-		Options
-			--init, -i  Initialize a init project
-			--export, -e  Export a PDF file
+		SYNOPSIS
+			onepunch init [-n directory_name]
+				Initialize a presentation.
+
+			onepunch serve
+				Open the presentation in the browser.
+
+			onepunch print
+				Print the presentation in a PDF file.
+
+		OPTIONS
+			-n or --name directory_name
+				Specify the name of the directory where the project is initialized. Defaults to onepunch-presentation.
+
+			--version
+				Display the version number.
+
+			--help
+				Display the documentation.
 	`,
 	flags: {
-		init: {
-			type: 'boolean',
-			default: false,
-			alias: 'i',
-		},
-		print: {
-			type: 'boolean',
-			default: false,
-			alias: 'p',
-		},
-		serve: {
-			type: 'boolean',
-			default: false,
+		name: {
+			type: 'string',
+			default: 'onepunch-presentation',
+			alias: 'n',
 		},
 	},
 });
 
-if (cli.flags.init && !cli.flags.print && !cli.flags.serve) {
-	init(cli.input[0]);
-} else if (cli.flags.print && !cli.flags.init && !cli.flags.serve) {
-	print();
-} else if (cli.flags.serve && !cli.flags.print && !cli.flags.init) {
-	serve();
-} else {
-	abort('Too many flags used, please double check the command.');
+switch (cli.input[0]) {
+	case 'init':
+		init(cli.flags);
+		break;
+	case 'serve':
+		serve();
+		break;
+	case 'print':
+		print();
+		break;
+	default:
+		cli.showHelp();
+		break;
 }
 
 function serve() {
@@ -53,8 +65,9 @@ function serve() {
 	});
 }
 
-function init(input) {
-	const presentationPath = path.resolve(input);
+function init(flags) {
+	const {name} = flags;
+	const presentationPath = path.resolve(name);
 	const presentationName = path.basename(presentationPath);
 
 	if (fs.existsSync(presentationPath)) {
