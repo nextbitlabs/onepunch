@@ -38,7 +38,7 @@
     "puppeteer": "2.0.0"
   },
   "devDependencies": {
-    "np": "^6.0.0",
+    "np": "^5.2.1",
     "xo": "^0.25.3"
   },
   "publishConfig": {
