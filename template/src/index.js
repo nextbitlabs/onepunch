@@ -1,5 +1,5 @@
 /*
-Get configuration parameters and initialize the web page;
+	Get configuration parameters and initialize the web page;
 */
 
 (async function () {
@@ -99,4 +99,4 @@ function addProgress(config) {
 			line.style.width = `${config.width * normIndex}px`;
 		})
 	}
-	}
+}
