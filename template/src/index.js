@@ -78,7 +78,7 @@ function addProgress(config) {
 		return;
 	}
 
-	const articles = [...document.getElementsByTagName('article')];
+	const articles = [...document.querySelectorAll()('main > article')];
 
 	if(config.progress === 'line') {
 		articles.forEach((article, index) => {
@@ -86,7 +86,7 @@ function addProgress(config) {
 			line.classList.add("progress-line");
 			article.appendChild(line);
 	
-			line.style.backgroundColor = 'var(--primary-color)';
+			line.style.backgroundColor = 'var(--primary-color, #000)';
 			
 			line.style.height = '3px';
 			line.style.position = 'absolute';
