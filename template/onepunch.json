@@ -1,4 +1,5 @@
 {
 	"width": 960,
-	"height": 600
+	"height": 600,
+	"progress": "line"
 }
