@@ -15,6 +15,7 @@ Get configuration parameters and initialize the web page;
 function init(config) {
 	addEventListeners(config);
 	setBorders(config.width, config.height);
+	addProgress(config);
 }
 
 /*
@@ -67,3 +68,35 @@ function handleOnkeydown(event) {
 		// No default
 	}
 }
+
+/*
+	Add progress to each slide based on config
+*/
+
+function addProgress(config) {
+	if(!config.progress || config.progress === 'none') {
+		return;
+	}
+
+	const articles = [...document.getElementsByTagName('article')];
+
+	if(config.progress === 'line') {
+		articles.forEach((article, index) => {
+			const line = document.createElement('div');
+			line.classList.add("progress-line");
+			article.appendChild(line);
+	
+			line.style.backgroundColor = 'var(--primary-color)';
+			
+			line.style.height = '3px';
+			line.style.position = 'absolute';
+			
+			line.style.bottom = '0';
+			line.style.left = '0';
+			
+			const normIndex = index / (articles.length - 1);
+	
+			line.style.width = `${config.width * normIndex}px`;
+		})
+	}
+	}
