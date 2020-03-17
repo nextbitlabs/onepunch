@@ -19,12 +19,18 @@ const cli = meow({
 			onepunch serve
 				Open the presentation in the browser.
 
-			onepunch print
+			onepunch print [-i htmlfile] [-o pdffile]
 				Print the presentation in a PDF file.
 
 		OPTIONS
 			-n or --name directory_name
 				Specify the name of the directory where the project is initialized. Defaults to onepunch-presentation.
+			
+			-i or --input htmlfile
+				Specify the HTML file to print, defaults to "index.html".
+			
+			-o or --output pdffile
+				Specify the name of the PDF file in output, defaults to "index.pdf".
 
 			--version
 				Display the version number.
@@ -38,6 +44,16 @@ const cli = meow({
 			default: 'onepunch-presentation',
 			alias: 'n',
 		},
+		input: {
+			type: 'string',
+			default: 'index.html',
+			alias: 'i',
+		},
+		output: {
+			type: 'string',
+			default: 'index.pdf',
+			alias: 'o',
+		},
 	},
 });
 
@@ -49,7 +65,7 @@ switch (cli.input[0]) {
 		serve();
 		break;
 	case 'print':
-		print();
+		print(cli.flags);
 		break;
 	default:
 		cli.showHelp();
@@ -78,7 +94,9 @@ function init(flags) {
 	fs.copySync(path.resolve(__dirname, 'template'), presentationPath);
 }
 
-function print() {
+function print(flags) {
+	const {input, output} = flags;
+
 	liveServer.start({
 		port: 8181,
 		root: process.cwd(),
@@ -93,9 +111,9 @@ function print() {
 	(async () => {
 		const browser = await puppeteer.launch();
 		const page = await browser.newPage();
-		await page.goto('http://127.0.0.1:8181/index.html');
+		await page.goto(`http://127.0.0.1:8181/${input}`);
 		await page.pdf({
-			path: 'index.pdf',
+			path: output,
 			width,
 			height,
 			printBackground: true,
