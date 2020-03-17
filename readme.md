@@ -45,8 +45,11 @@ The command above starts a local server and opens the browser, use the arrow key
 Inside the project directory, run:
 
 ```sh
-$ onepunch print
+$ onepunch print [-i htmlfile] [-o pdffile]
 ```
+
+Flag `-i` (or `--input`) specifies the HTML file to print, it defaults to "index.html".
+Flag `-o` (or `--output`) specifies the name of the PDF file in output, it defaults to "index.pdf".
 
 ### Update
 
