@@ -11,3 +11,9 @@ Print the presentation in a PDF file with:
 ```
 $ onepunch print
 ```
+
+Update files in the `src` directory according to the latest release:
+
+```
+$ onepunch update
+```

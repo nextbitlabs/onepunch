@@ -16,6 +16,12 @@ $ npm install -g @nextbitlabs/onepunch
 
 Please note that onepunch makes use of [puppeteer](https://github.com/puppeteer/puppeteer/), which will download chromium. This is necessary to print the PDF file.
 
+Update **onepunch** to the latest release with:
+
+```
+$ npm update -g @nextbitlabs/onepunch
+```
+
 ### Create a project
 
 ```
@@ -40,6 +46,21 @@ Inside the project directory, run:
 
 ```
 $ onepunch print
+```
+
+### Update
+
+Update files in the `src` directory according to the latest release of **onepunch**, please note that any custom change inside directory `src` will be overwritten:
+
+```
+$ onepunch update
+```
+
+The above command assumes you have installed the latest release of **onepunch**.
+If this is not the case, update **onepunch** to the latest release with:
+
+```
+$ npm update -g @nextbitlabs/onepunch
 ```
 
 ### Create custom styles

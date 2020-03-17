@@ -22,13 +22,17 @@ const cli = meow({
 			onepunch print [-i htmlfile] [-o pdffile]
 				Print the presentation in a PDF file.
 
+			onepunch update
+				Update files in the src directory according to the latest release.
+				Please note that any custom change inside directory src will be overwritten
+
 		OPTIONS
 			-n or --name directory_name
 				Specify the name of the directory where the project is initialized. Defaults to onepunch-presentation.
-			
+
 			-i or --input htmlfile
 				Specify the HTML file to print, defaults to "index.html".
-			
+
 			-o or --output pdffile
 				Specify the name of the PDF file in output, defaults to "index.pdf".
 
@@ -67,6 +71,9 @@ switch (cli.input[0]) {
 	case 'print':
 		print(cli.flags);
 		break;
+	case 'update':
+		update();
+		break;
 	default:
 		cli.showHelp();
 		break;
@@ -92,6 +99,20 @@ function init(flags) {
 
 	fs.mkdirSync(presentationPath);
 	fs.copySync(path.resolve(__dirname, 'template'), presentationPath);
+}
+
+function update() {
+	const file = 'onepunch.json';
+
+	if (!fs.existsSync(file)) {
+		abort('File onepunch.json is not present. Are you sure this is the right directory?');
+	}
+
+	fs.copySync(
+		path.resolve(__dirname, 'template/src'),
+		'src',
+		{overwrite: true},
+	);
 }
 
 function print(flags) {
