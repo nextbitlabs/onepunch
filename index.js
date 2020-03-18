@@ -15,6 +15,17 @@ const cli = meow({
 
 			${chalk.bold('onepunch')} -- create presentations with web technology
 
+		${chalk.bold('DESCRIPTION')}
+
+			${chalk.bold('onepunch')} is a command-line interface useful to create presentations with web technology.
+			Moreover, thanks to puppeteer, ${chalk.bold('onepunch')} can print the presentation in a PDF file.
+
+			${chalk.bold('onepunch')} is designed for designers, it does not provide any default style.
+			Designers can define custom styles by writing CSS files and linking them in the ${chalk.underline('index.html')}.
+
+			${chalk.bold('onepunch')} is open source software licensed under the MIT License,
+			please visit https://github.com/nextbitlabs/onepunch for further details.
+
 		${chalk.bold('SYNOPSIS')}
 
 			${chalk.bold('onepunch init')} [${chalk.bold('-n')} ${chalk.italic('directory_name')}]
