@@ -5,41 +5,45 @@ const fs = require('fs-extra');
 const meow = require('meow');
 const puppeteer = require('puppeteer');
 const liveServer = require('live-server');
+const chalk = require('chalk');
 
 const cli = meow({
 	description: false,
 	help: `
-		NAME
-			onepunch -- create presentation with web technology
+		${chalk.bold('NAME')}
 
-		SYNOPSIS
-			onepunch init [-n directory_name]
+			${chalk.bold('onepunch')} -- create presentations with web technology
+
+		${chalk.bold('SYNOPSIS')}
+
+			${chalk.bold('onepunch init')} [${chalk.bold('-n')} ${chalk.italic('directory_name')}]
 				Initialize a presentation.
 
-			onepunch serve
+			${chalk.bold('onepunch serve')}
 				Open the presentation in the browser.
 
-			onepunch print [-i htmlfile] [-o pdffile]
+			${chalk.bold('onepunch print')} [${chalk.bold('-i')} ${chalk.italic('htmlfile')}] [${chalk.bold('-o')} ${chalk.italic('pdffile')}]
 				Print the presentation in a PDF file.
 
-			onepunch update
+			${chalk.bold('onepunch update')}
 				Update files in the src directory according to the latest release.
 				Please note that any custom change inside directory src will be overwritten
 
-		OPTIONS
-			-n or --name directory_name
+		${chalk.bold('OPTIONS')}
+
+			${chalk.bold('-n')} or ${chalk.bold('--name')} ${chalk.italic('directory_name')}
 				Specify the name of the directory where the project is initialized. Defaults to onepunch-presentation.
 
-			-i or --input htmlfile
-				Specify the HTML file to print, defaults to "index.html".
+			${chalk.bold('-i')} or ${chalk.bold('--input')} ${chalk.italic('htmlfile')}
+				Specify the HTML file to print, defaults to ${chalk.italic('index.html')}.
 
-			-o or --output pdffile
-				Specify the name of the PDF file in output, defaults to "index.pdf".
+			${chalk.bold('-o')} or ${chalk.bold('--output')} ${chalk.italic('pdffile')}
+				Specify the name of the PDF file in output, defaults to ${chalk.italic('index.pdf')}.
 
-			--version
+			${chalk.bold('--version')}
 				Display the version number.
 
-			--help
+			${chalk.bold('--help')}
 				Display the documentation.
 	`,
 	flags: {
