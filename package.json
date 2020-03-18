@@ -32,9 +32,11 @@
   },
   "license": "MIT",
   "dependencies": {
+    "chalk": "^3.0.0",
     "fs-extra": "^8.1.0",
     "live-server": "^1.2.1",
     "meow": "^6.0.0",
+    "ora": "^4.0.3",
     "puppeteer": "2.0.0"
   },
   "devDependencies": {
