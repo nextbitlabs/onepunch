@@ -27,19 +27,19 @@ const cli = meow({
 				Print the presentation in a PDF file.
 
 			${chalk.bold('onepunch update')}
-				Update files in the src directory according to the latest release.
-				Please note that any custom change inside directory src will be overwritten
+				Update files in the ${chalk.underline('src')} directory according to the latest release.
+				Please note that any custom change inside directory ${chalk.underline('src')} will be overwritten.
 
 		${chalk.bold('OPTIONS')}
 
 			${chalk.bold('-n')} or ${chalk.bold('--name')} ${chalk.italic('directory_name')}
-				Specify the name of the directory where the project is initialized. Defaults to onepunch-presentation.
+				Specify the name of the directory where the project is initialized. Defaults to ${chalk.underline('onepunch-presentation')}.
 
 			${chalk.bold('-i')} or ${chalk.bold('--input')} ${chalk.italic('htmlfile')}
-				Specify the HTML file to print, defaults to ${chalk.italic('index.html')}.
+				Specify the HTML file to print, defaults to ${chalk.underline('index.html')}.
 
 			${chalk.bold('-o')} or ${chalk.bold('--output')} ${chalk.italic('pdffile')}
-				Specify the name of the PDF file in output, defaults to ${chalk.italic('index.pdf')}.
+				Specify the name of the PDF file in output, defaults to ${chalk.underline('index.pdf')}.
 
 			${chalk.bold('--version')}
 				Display the version number.
