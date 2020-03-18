@@ -124,6 +124,7 @@ function update() {
 }
 
 function print(flags) {
+	const spinner = ora('Printing ...').start();
 	const {input, output} = flags;
 
 	liveServer.start({
@@ -149,6 +150,7 @@ function print(flags) {
 		});
 		await browser.close();
 		liveServer.shutdown();
+		spinner.succeed(`File ${chalk.underline(output)} has been successfully created.`);
 	})();
 }
 
