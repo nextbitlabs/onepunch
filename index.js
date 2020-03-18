@@ -6,6 +6,7 @@ const meow = require('meow');
 const puppeteer = require('puppeteer');
 const liveServer = require('live-server');
 const chalk = require('chalk');
+const ora = require('ora');
 
 const cli = meow({
 	description: false,
@@ -93,16 +94,17 @@ function serve() {
 }
 
 function init(flags) {
+	const spinner = ora('Initializing ...').start();
 	const {name} = flags;
 	const presentationPath = path.resolve(name);
-	const presentationName = path.basename(presentationPath);
 
 	if (fs.existsSync(presentationPath)) {
-		abort(`The directory '${presentationName}' is already existing.`);
+		abort(`The directory ${chalk.underline(name)} is already existing.`, spinner);
 	}
 
 	fs.mkdirSync(presentationPath);
 	fs.copySync(path.resolve(__dirname, 'template'), presentationPath);
+	spinner.succeed(`Directory ${chalk.underline(name)} has been initialized.`);
 }
 
 function update() {
@@ -148,8 +150,13 @@ function print(flags) {
 	})();
 }
 
-function abort(message) {
-	console.error(message);
+function abort(message, spinner = null) {
+	if (spinner) {
+		spinner.fail(message);
+	} else {
+		console.error(message);
+	}
+
 	console.error('Aborting.');
 	process.exit(1);
 }
