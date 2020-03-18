@@ -108,10 +108,11 @@ function init(flags) {
 }
 
 function update() {
+	const spinner = ora('Updating ...').start();
 	const file = 'onepunch.json';
 
 	if (!fs.existsSync(file)) {
-		abort('File onepunch.json is not present. Are you sure this is the right directory?');
+		abort(`File ${chalk.underline('onepunch.json')} is not present. Are you sure this is the right directory?`, spinner);
 	}
 
 	fs.copySync(
@@ -119,6 +120,7 @@ function update() {
 		'src',
 		{overwrite: true},
 	);
+	spinner.succeed(`Directory ${chalk.underline('src')} has been updated to release ${cli.pkg.version}.`);
 }
 
 function print(flags) {
