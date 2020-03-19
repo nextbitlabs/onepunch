@@ -35,10 +35,11 @@ The command above creates the directory `directory-name` with all the files need
 Inside the project directory, run:
 
 ```sh
-$ onepunch serve
+$ onepunch serve [-i htmlfile]
 ```
 
 The command above starts a local server and opens the browser, use the arrow keys to see the next and previous slides.
+Flag `-i` (or `--input`) specifies the HTML file to open, it defaults to "index.html".
 
 ### Print the PDF
 
