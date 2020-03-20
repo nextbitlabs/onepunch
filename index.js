@@ -31,7 +31,7 @@ const cli = meow({
 			${chalk.bold('onepunch init')} [${chalk.bold('-n')} ${chalk.italic('directory_name')}]
 				Initialize a presentation.
 
-			${chalk.bold('onepunch serve')}
+			${chalk.bold('onepunch serve')} [${chalk.bold('-i')} ${chalk.italic('htmlfile')}]
 				Open the presentation in the browser.
 
 			${chalk.bold('onepunch print')} [${chalk.bold('-i')} ${chalk.italic('htmlfile')}] [${chalk.bold('-o')} ${chalk.italic('pdffile')}]
@@ -47,7 +47,7 @@ const cli = meow({
 				Specify the name of the directory where the project is initialized. Defaults to ${chalk.underline('onepunch-presentation')}.
 
 			${chalk.bold('-i')} or ${chalk.bold('--input')} ${chalk.italic('htmlfile')}
-				Specify the HTML file to print, defaults to ${chalk.underline('index.html')}.
+				Specify the HTML file to serve or print, defaults to ${chalk.underline('index.html')}.
 
 			${chalk.bold('-o')} or ${chalk.bold('--output')} ${chalk.italic('pdffile')}
 				Specify the name of the PDF file in output, defaults to ${chalk.underline('index.pdf')}.
@@ -104,7 +104,7 @@ switch (cli.input[0]) {
 		init(cli.flags);
 		break;
 	case 'serve':
-		serve();
+		serve(cli.flags);
 		break;
 	case 'print':
 		print(cli.flags);
@@ -117,11 +117,11 @@ switch (cli.input[0]) {
 		break;
 }
 
-function serve() {
+function serve(flags) {
 	liveServer.start({
 		port: 8180,
 		root: process.cwd(),
-		open: true,
+		open: `/${flags.input}`,
 		logLevel: 1,
 	});
 }
