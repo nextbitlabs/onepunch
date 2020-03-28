@@ -8,7 +8,7 @@
 	};
 
 	/*
-		Get configuration parameters and initialize the web page;
+		Get configuration parameters and initialize the web page.
 	*/
 
 	(async function () {
@@ -18,17 +18,19 @@
 	})();
 
 	/*
-		Initialize services
+		Initialize services.
 	*/
 
 	function init(config) {
 		addEventListeners(config);
 		setBorders(config.width, config.height);
 		addProgress(config);
+		addSlideNumber(config);
+		addDate(config);
 	}
 
 	/*
-		Add event listeners
+		Add event listeners.
 	*/
 
 	function addEventListeners(config) {
@@ -46,7 +48,7 @@
 	}
 
 	/*
-	Set article borders
+	 Set article borders.
 	*/
 
 	function setBorders(width, height) {
@@ -59,7 +61,7 @@
 	}
 
 	/*
-		Change slide with arrow keys
+		Change slide with arrow keys.
 	*/
 
 	function handleOnkeydown(event) {
@@ -84,7 +86,7 @@
 	}
 
 	/*
-		Add progress to each slide based on config
+		Add progress to each slide based on config.
 	*/
 
 	function addProgress(config) {
@@ -149,10 +151,46 @@
 	}
 
 	/*
-		Return the list of slides
+		Return the list of slides.
 	*/
 
 	function getSlides() {
 		return [...document.querySelectorAll('main > article')];
+	}
+
+	/*
+		Add slide numbers.
+	*/
+
+	function addSlideNumber(config) {
+		const slides = getSlides();
+		slides.forEach((slide, index) => {
+			const el = slide.querySelector('[data-onepunch="slide-number"]');
+			if (el) {
+				if (config.slideNumber) {
+					el.textContent = index + 1;
+				} else {
+					el.style.display = 'none';
+				}
+			}
+		});
+	}
+
+	/*
+		Add date.
+	*/
+
+	function addDate(config) {
+		const slides = getSlides();
+		slides.forEach(slide => {
+			const el = slide.querySelector('[data-onepunch="date"]');
+			if (el) {
+				if (config.date) {
+					el.textContent = config.date;
+				} else {
+					el.style.display = 'none';
+				}
+			}
+		});
 	}
 })();
