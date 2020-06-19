@@ -44,7 +44,8 @@ const cli = meow({
 		${chalk.bold('OPTIONS')}
 
 			${chalk.bold('-n')} or ${chalk.bold('--name')} ${chalk.italic('directory_name')}
-				Specify the name of the directory where the project is initialized. Defaults to ${chalk.underline('onepunch-presentation')}.
+				Specify the name of the directory where the project is initialized. 
+				Defaults to ${chalk.underline('onepunch-presentation')}.
 
 			${chalk.bold('-i')} or ${chalk.bold('--input')} ${chalk.italic('htmlfile')}
 				Specify the HTML file to serve or print, defaults to ${chalk.underline('index.html')}.
@@ -57,6 +58,29 @@ const cli = meow({
 
 			${chalk.bold('--help')}
 				Display the documentation.
+
+		${chalk.bold('FILES')}
+
+			File ${chalk.underline('onepunch.json')} defines config settings as key-value pairs in JSON format.
+			The following keys are provided:
+
+			${chalk.bold('width')}: <Number>
+				Describe the slide width in pixels, defaults to 960.
+
+			${chalk.bold('height')}: <Number>
+				Describe the slide height in pixels, defaults to 600.
+
+			${chalk.bold('progress')}: <String>
+				Describe the presentation progress. At the moment only values "line"
+				and "none" are supported.
+
+			${chalk.bold('date')}: <String>
+				Define the text content of HTML elements with data attribute 
+				data-onepunch="date", such as <span data-onepunch="date"></span>.
+
+			${chalk.bold('slideNumber')}: <Boolean>
+				If true, show the slide number in HTML elements with data attribute 
+				data-onepunch="slide-number", such as <span data-onepunch="slide-number"></span>.
 
 		${chalk.bold('LICENSE')}
 

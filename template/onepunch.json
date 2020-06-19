@@ -1,5 +1,7 @@
 {
 	"width": 960,
 	"height": 600,
-	"progress": "line"
+	"progress": "line",
+	"date": "",
+	"slideNumber": false
 }
