@@ -35,13 +35,13 @@
     "chalk": "^3.0.0",
     "fs-extra": "^8.1.0",
     "live-server": "^1.2.1",
-    "meow": "^6.0.0",
-    "ora": "^4.0.3",
-    "puppeteer": "2.0.0"
+    "meow": "^6.1.1",
+    "ora": "^4.1.1",
+    "puppeteer": "^5.5.0"
   },
   "devDependencies": {
-    "np": "^5.2.1",
-    "xo": "^0.25.3"
+    "np": "^7.0.0",
+    "xo": "^0.36.1"
   },
   "publishConfig": {
     "access": "public"
