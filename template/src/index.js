@@ -165,12 +165,12 @@
 	function addSlideNumber(config) {
 		const slides = getSlides();
 		slides.forEach((slide, index) => {
-			const el = slide.querySelector('[data-onepunch="slide-number"]');
-			if (el) {
+			const element = slide.querySelector('[data-onepunch="slide-number"]');
+			if (element) {
 				if (config.slideNumber) {
-					el.textContent = index + 1;
+					element.textContent = index + 1;
 				} else {
-					el.style.display = 'none';
+					element.style.display = 'none';
 				}
 			}
 		});
@@ -183,12 +183,12 @@
 	function addDate(config) {
 		const slides = getSlides();
 		slides.forEach(slide => {
-			const el = slide.querySelector('[data-onepunch="date"]');
-			if (el) {
+			const element = slide.querySelector('[data-onepunch="date"]');
+			if (element) {
 				if (config.date) {
-					el.textContent = config.date;
+					element.textContent = config.date;
 				} else {
-					el.style.display = 'none';
+					element.style.display = 'none';
 				}
 			}
 		});
