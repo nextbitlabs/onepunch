@@ -1,6 +1,6 @@
 {
   "name": "@nextbitlabs/onepunch",
-  "version": "2.4.1",
+  "version": "2.4.2",
   "description": "Command-line interface to create PDF presentations using web technology.",
   "main": "index.js",
   "scripts": {
