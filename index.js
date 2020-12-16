@@ -198,7 +198,10 @@ function print(flags) {
 	(async () => {
 		const browser = await puppeteer.launch();
 		const page = await browser.newPage();
-		await page.goto(`http://127.0.0.1:8181/${input}`);
+		await page.goto(
+			`http://127.0.0.1:8181/${input}`,
+			{waitUntil: 'networkidle0'},
+		);
 		await page.pdf({
 			path: output,
 			width,
