@@ -1,4 +1,6 @@
 (function () {
+	const isAutomated = navigator.webdriver;
+
 	/*
 		Describe the app state.
 	*/
@@ -27,6 +29,9 @@
 		addProgress(config);
 		addSlideNumber(config);
 		addDate(config);
+		if (!isAutomated) {
+			addCopyToClipBoardButton(config);
+		}
 	}
 
 	/*
@@ -42,6 +47,10 @@
 			'resize',
 			() => {
 				setBorders(config.width, config.height);
+				if (!isAutomated) {
+					setCopyToClipBoardButtonPosition(config);
+				}
+
 				updateScroll();
 			},
 		);
@@ -192,5 +201,45 @@
 				}
 			}
 		});
+	}
+
+	/*
+		Add copy-to-clipboard button
+	*/
+	function addCopyToClipBoardButton(config) {
+		appendCopyToClipBoardButton();
+		setCopyToClipBoardButtonPosition(config);
+	}
+
+	function copyToClipBoard() {
+		fetch(window.location.href)
+			.then(response => response.text())
+			.then(text => {
+				const element = document.createElement('html');
+				element.innerHTML = text;
+				const articles = element.querySelectorAll('main > article');
+				const htmlSnippet = articles[state.pageIndex].outerHTML;
+				navigator.clipboard.writeText(htmlSnippet).then(() => {
+					// Console.log('Copied to clipboard.');
+				}, () => {
+					// Console.log('Error, not copied.');
+				});
+			});
+	}
+
+	function appendCopyToClipBoardButton() {
+		const button = document.createElement('button');
+		button.className = 'copy-to-clipboard';
+		button.textContent = 'copy to clipboard';
+		button.addEventListener('click', copyToClipBoard);
+		document.body.append(button);
+	}
+
+	function setCopyToClipBoardButtonPosition(config) {
+		const button = document.querySelectorAll('.copy-to-clipboard')[0];
+		const bottom = Math.max(0, (window.innerHeight - config.height) / 2);
+		const right = Math.max(0, (window.innerWidth - config.width) / 2);
+		button.style.bottom = `calc(${bottom}px - 2.5vw)`;
+		button.style.right = `${right}px`;
 	}
 })();

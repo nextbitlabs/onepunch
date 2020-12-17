@@ -5,6 +5,13 @@ html, body {
 	overflow: hidden;
 }
 
+body, button {
+	font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	-webkit-text-size-adjust: 100%;
+}
+
 main > article {
 	margin: 0;
 	padding: 10px;
@@ -15,4 +22,11 @@ main > article {
 	border-width: 0;
 	position: relative;
 	box-sizing: border-box;
+}
+
+button.copy-to-clipboard {
+	position: fixed;
+	font-size: 0.9vw;
+	padding: 0.2vw;
+	cursor: pointer;
 }
