@@ -2,14 +2,6 @@
 	const isAutomated = navigator.webdriver;
 
 	/*
-		Describe the app state.
-	*/
-
-	const state = {
-		pageIndex: guessPageIndex(),
-	};
-
-	/*
 		Get configuration parameters and initialize the web page.
 	*/
 
@@ -24,6 +16,8 @@
 	*/
 
 	function init(config) {
+		addSlideId();
+		setHash();
 		addEventListeners(config);
 		setBorders(config.width, config.height);
 		addProgress(config);
@@ -32,6 +26,14 @@
 		if (!isAutomated) {
 			addCopyToClipBoardButton(config);
 		}
+	}
+
+	/*
+		Set location hash
+	*/
+
+	function setHash() {
+		window.location.hash = window.location.hash || getSlides()[0].id;
 	}
 
 	/*
@@ -51,7 +53,7 @@
 					setCopyToClipBoardButtonPosition(config);
 				}
 
-				updateScroll();
+				updateLocationHash(getSlideId());
 			},
 		);
 	}
@@ -82,16 +84,22 @@
 		switch (keyCode) {
 			case RIGHT:
 			case DOWN:
-				state.pageIndex = Math.min(state.pageIndex + 1, numberOfSlides());
-				updateScroll();
+				goToNextPage();
 				break;
 			case UP:
 			case LEFT:
-				state.pageIndex = Math.max(state.pageIndex - 1, 0);
-				updateScroll();
+				goToPreviousPage();
 				break;
 			// No default
 		}
+	}
+
+	function goToNextPage() {
+		updateUrl(+1);
+	}
+
+	function goToPreviousPage() {
+		updateUrl(-1);
 	}
 
 	/*
@@ -127,19 +135,34 @@
 	}
 
 	/*
-		Return the correct scroll position.
+		Update location hash.
 	*/
 
-	function getScroll() {
-		return state.pageIndex * window.innerHeight;
+	function updateLocationHash(pageId) {
+		window.location.hash = `#${pageId}`;
 	}
 
 	/*
-		Update scroll position on resize events.
+		Get the id of the current slide
 	*/
 
-	function updateScroll() {
-		window.scroll(0, getScroll());
+	function getSlideId() {
+		return window.location.hash.slice(1);
+	}
+
+	/*
+		Update url.
+	*/
+
+	function updateUrl(increment) {
+		const index = getPageIndex();
+		if (
+			(increment === +1 && index < numberOfSlides() - 1) ||
+			(increment === -1 && index > 0)
+		) {
+			const slideId = getSlides()[index + increment].id;
+			updateLocationHash(slideId);
+		}
 	}
 
 	/*
@@ -151,12 +174,13 @@
 	}
 
 	/*
-		Guess page index from the scroll position.
+		Get page index location hash.
 	*/
 
-	function guessPageIndex() {
-		const index = Math.round(document.documentElement.scrollTop / window.innerHeight);
-		return Math.max(0, Math.min(index, numberOfSlides()));
+	function getPageIndex() {
+		return getSlides()
+			.map(page => page.id)
+			.findIndex(id => id === getSlideId());
 	}
 
 	/*
@@ -204,6 +228,17 @@
 	}
 
 	/*
+		Add slide id
+	*/
+
+	function addSlideId() {
+		const slides = getSlides();
+		slides.forEach((slide, index) => {
+			slide.id = slide.id || `${index + 1}`;
+		});
+	}
+
+	/*
 		Add copy-to-clipboard button
 	*/
 	function addCopyToClipBoardButton(config) {
@@ -218,7 +253,7 @@
 				const element = document.createElement('html');
 				element.innerHTML = text;
 				const articles = element.querySelectorAll('main > article');
-				const htmlSnippet = articles[state.pageIndex].outerHTML;
+				const htmlSnippet = articles[getPageIndex()].outerHTML;
 				navigator.clipboard.writeText(htmlSnippet).then(() => {
 					// Console.log('Copied to clipboard.');
 				}, () => {
