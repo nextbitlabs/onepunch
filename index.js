@@ -1,12 +1,18 @@
 #!/usr/bin/env node
 
-const path = require('path');
-const fs = require('fs-extra');
-const meow = require('meow');
-const puppeteer = require('puppeteer');
-const liveServer = require('live-server');
-const chalk = require('chalk');
-const ora = require('ora');
+import process from 'node:process';
+import path from 'node:path';
+import {fileURLToPath} from 'node:url';
+import {existsSync, mkdirSync, readFileSync} from 'node:fs';
+import fs from 'fs-extra';
+import meow from 'meow';
+import * as puppeteer from 'puppeteer';
+import LiveServer from 'alive-server';
+import chalk from 'chalk';
+import ora from 'ora';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const cli = meow({
 	description: false,
@@ -104,6 +110,7 @@ const cli = meow({
 			OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 			THE SOFTWARE.
 	`,
+	importMeta: import.meta,
 	flags: {
 		name: {
 			type: 'string',
@@ -142,7 +149,7 @@ switch (cli.input[0]) {
 }
 
 function serve(flags) {
-	liveServer.start({
+	LiveServer.start({
 		port: 8180,
 		root: process.cwd(),
 		open: `/${flags.input}`,
@@ -155,11 +162,11 @@ function init(flags) {
 	const {name} = flags;
 	const presentationPath = path.resolve(name);
 
-	if (fs.existsSync(presentationPath)) {
+	if (existsSync(presentationPath)) {
 		abort(`The directory ${chalk.underline(name)} is already existing.`, spinner);
 	}
 
-	fs.mkdirSync(presentationPath);
+	mkdirSync(presentationPath);
 	fs.copySync(path.resolve(__dirname, 'template'), presentationPath);
 	spinner.succeed(`Directory ${chalk.underline(name)} has been initialized.`);
 }
@@ -168,15 +175,13 @@ function update() {
 	const spinner = ora('Updating ...').start();
 	const file = 'onepunch.json';
 
-	if (!fs.existsSync(file)) {
+	if (!existsSync(file)) {
 		abort(`File ${chalk.underline('onepunch.json')} is not present. Are you sure this is the right directory?`, spinner);
 	}
 
-	fs.copySync(
-		path.resolve(__dirname, 'template/src'),
-		'src',
-		{overwrite: true},
-	);
+	fs.copySync(path.resolve(__dirname, 'template/src'), 'src', {
+		overwrite: true,
+	});
 	spinner.succeed(`Directory ${chalk.underline('src')} has been updated to release ${cli.pkg.version}.`);
 }
 
@@ -184,24 +189,23 @@ function print(flags) {
 	const spinner = ora('Printing ...').start();
 	const {input, output} = flags;
 
-	liveServer.start({
+	LiveServer.start({
 		port: 8181,
 		root: process.cwd(),
 		open: false,
 		logLevel: 0,
 	});
 
-	const config = JSON.parse(fs.readFileSync('onepunch.json'));
+	const config = JSON.parse(readFileSync('onepunch.json'));
 	const width = config.width || 960;
 	const height = config.height || 600;
 
 	(async () => {
 		const browser = await puppeteer.launch();
 		const page = await browser.newPage();
-		await page.goto(
-			`http://127.0.0.1:8181/${input}`,
-			{waitUntil: 'networkidle0'},
-		);
+		await page.goto(`http://127.0.0.1:8181/${input}`, {
+			waitUntil: 'networkidle0',
+		});
 		await page.pdf({
 			path: output,
 			width,
@@ -209,7 +213,7 @@ function print(flags) {
 			printBackground: true,
 		});
 		await browser.close();
-		liveServer.shutdown();
+		LiveServer.shutdown();
 		spinner.succeed(`File ${chalk.underline(output)} has been successfully created.`);
 	})();
 }
