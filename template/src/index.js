@@ -41,21 +41,15 @@
 	*/
 
 	function addEventListeners(config) {
-		window.addEventListener(
-			'keydown',
-			handleOnkeydown,
-		);
-		window.addEventListener(
-			'resize',
-			() => {
-				setBorders(config.width, config.height);
-				if (!isAutomated) {
-					setCopyToClipBoardButtonPosition(config);
-				}
+		window.addEventListener('keydown', handleOnkeydown);
+		window.addEventListener('resize', () => {
+			setBorders(config.width, config.height);
+			if (!isAutomated) {
+				setCopyToClipBoardButtonPosition(config);
+			}
 
-				updateLocationHash(getSlideId());
-			},
-		);
+			updateLocationHash(getSlideId());
+		});
 	}
 
 	/*
@@ -66,9 +60,9 @@
 		const articles = getSlides();
 		const borderLeft = Math.max(0, (window.innerWidth - width) / 2);
 		const borderTop = Math.max(0, (window.innerHeight - height) / 2);
-		articles.forEach(elt => {
+		for (const elt of articles) {
 			elt.style.borderWidth = `${borderTop}px ${borderLeft}px`;
-		});
+		}
 	}
 
 	/*
@@ -156,10 +150,7 @@
 
 	function updateUrl(increment) {
 		const index = getPageIndex();
-		if (
-			(increment === +1 && index < numberOfSlides() - 1) ||
-			(increment === -1 && index > 0)
-		) {
+		if ((increment === +1 && index < numberOfSlides() - 1) || (increment === -1 && index > 0)) {
 			const slideId = getSlides()[index + increment].id;
 			updateLocationHash(slideId);
 		}
@@ -215,7 +206,7 @@
 
 	function addDate(config) {
 		const slides = getSlides();
-		slides.forEach(slide => {
+		for (const slide of slides) {
 			const element = slide.querySelector('[data-onepunch="date"]');
 			if (element) {
 				if (config.date) {
@@ -224,7 +215,7 @@
 					element.style.display = 'none';
 				}
 			}
-		});
+		}
 	}
 
 	/*
@@ -254,11 +245,14 @@
 				element.innerHTML = text;
 				const articles = element.querySelectorAll('main > article');
 				const htmlSnippet = articles[getPageIndex()].outerHTML;
-				navigator.clipboard.writeText(htmlSnippet).then(() => {
-					// Console.log('Copied to clipboard.');
-				}, () => {
-					// Console.log('Error, not copied.');
-				});
+				navigator.clipboard.writeText(htmlSnippet).then(
+					() => {
+						// Console.log('Copied to clipboard.');
+					},
+					() => {
+						// Console.log('Error, not copied.');
+					},
+				);
 			});
 	}
 
